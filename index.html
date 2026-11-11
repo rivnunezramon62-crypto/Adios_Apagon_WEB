@@ -73,6 +73,7 @@ dialog::backdrop{background:rgba(5,10,20,.82)}
 .dlg ul{padding-left:1.2em;max-width:62ch}
 .dlg li{margin-bottom:.6em}
 .ej{padding:12px 14px;border-left:4px solid var(--senal);background:#0b1526;border-radius:0 10px 10px 0;margin:0 0 1em}
+.ver{display:inline-block;margin:6px 0 0 4px;padding:4px 10px;border-radius:8px;border:1px solid var(--senal);background:none;color:var(--senal);font:inherit;font-size:.85rem;cursor:pointer}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -100,11 +101,14 @@ dialog::backdrop{background:rgba(5,10,20,.82)}
     <h2>Esto es lo que suele pasar</h2>
     <ul>
       <li>Cada vendedor te habla de números distintos: vatios, vatios-hora, picos, voltajes.</li>
-      <li>No sabes si la estación aguanta tu refrigerador y tu nevera a la vez.</li>
+      <li>No sabes si la estación aguanta tu refrigerador y tu nevera a la vez. <b>Te lo decimos gratis.</b> <button class="ver" data-img="captura-03-arranques-simultaneos.png" data-t="Peor caso de arranques coincidentes">Ver pantalla</button></li>
+      <li>Tienes varias propuestas de estaciones, MPPT o inversores y no sabes cuál respalda mejor tu carga. <b>La app PLUS te lo dirá.</b> <button class="ver" data-img="captura-04-comparar-estaciones.png" data-t="Comparación de estaciones con tu carga">Ver pantalla</button></li>
       <li>Los paneles «entran» en la estación, pero nadie te dice a qué temperatura ambiente en invierno se daña tu equipo.</li>
-      <li>Te venden paneles y no te dicen que esa potencia es de laboratorio, y quieres saber realmente cuánto vas a generar en verano.</li>
-      <li>Te venden cables para los paneles y no sabes las pérdidas de potencia que tendrás con el calibre propuesto.</li>
-      <li>Ya compraste, y no estás seguro de que lo instalado esté bien ni de cuánto te debería durar.</li>
+      <li>Te venden paneles y no te dicen que esa potencia es de laboratorio, y quieres saber realmente cuánto vas a generar en verano. Compara diferentes paneles de igual o similar potencia y te decimos la mejor opción <b>con la app PLUS.</b> <button class="ver" data-img="captura-05-comparar-paneles.png" data-t="Comparación de paneles de igual potencia">Ver pantalla</button></li>
+      <li>Te venden cables para los paneles y no sabes las pérdidas de potencia que tendrás con el calibre propuesto o el tipo de cable. <b>La app PLUS es tu solución.</b> <button class="ver" data-img="captura-07-calculo-cable.png" data-t="Cálculo del cable con 1 %, 3 % y 5 % de pérdidas">Ver pantalla</button></li>
+      <li>Ya compraste, y no estás seguro de que lo instalado esté bien ni de cuánto te debería durar. <b>La app PLUS te ayuda.</b> <button class="ver" data-img="captura-08-revisar-instalacion.png" data-t="Revisión de una instalación ya comprada">Ver pantalla</button></li>
+      <li>Te hablan de protecciones contra rayos y te prometen villas y castillas. <b>La app gratis te lo explica todo.</b> <button class="ver" data-img="captura-10-protecciones-rayos.png" data-t="Protecciones contra rayos">Ver pantalla</button></li>
+      <li>Con la app gratis puedes saber cómo, por qué y dónde conectar un transferencial automático, un controlador de voltaje y un bypass manual. <button class="ver" data-img="captura-11-transferencia-bypass.png" data-t="Transferencia automática, controlador de voltaje y bypass">Ver pantalla</button></li>
     </ul>
   </div>
 </section>
@@ -119,16 +123,16 @@ dialog::backdrop{background:rgba(5,10,20,.82)}
   <div id="p1" role="tabpanel" aria-labelledby="t1">
     <h3>Cuatro pasos para salir de la confusión</h3>
     <ol class="pasos">
-      <li><b>Calcula tu carga</b>Anota tus equipos y su potencia. Los motores (aire, refrigerador) piden más al arrancar, y la app lo tiene en cuenta.</li>
-      <li><b>Compara las estaciones que te ofrecen</b>Guárdalas en la biblioteca y compara su comportamiento con tu carga, una al lado de la otra.</li>
-      <li><b>Elige paneles compatibles</b>La app descarta los que ponen en riesgo la estación y te dice cuántos conectar en serie y en paralelo.</li>
-      <li><b>Calcula el cable</b>Según la distancia y el material, ves la sección necesaria con 1 %, 3 % o 5 % de pérdidas.</li>
+      <li><b>Calcula tu carga</b>Anota tus equipos y su potencia. Los motores (aire, refrigerador) piden más al arrancar, y la app lo tiene en cuenta. <button class="ver" data-img="captura-01-seleccion-equipos.png" data-t="Selección de equipos y horario del respaldo">Ver pantalla</button></li>
+      <li><b>Compara las estaciones que te ofrecen</b>Guárdalas en la biblioteca y compara su comportamiento con tu carga, una al lado de la otra. <button class="ver" data-img="captura-04-comparar-estaciones.png" data-t="Comparación de estaciones con tu carga">Ver pantalla</button></li>
+      <li><b>Elige paneles compatibles</b>La app descarta los que ponen en riesgo la estación y te dice cuántos conectar en serie y en paralelo. <button class="ver" data-img="captura-06-compatibilidad-paneles.png" data-t="Compatibilidad de paneles: Voc en frío, serie y paralelo">Ver pantalla</button></li>
+      <li><b>Calcula el cable</b>Según la distancia y el material, ves la sección necesaria con 1 %, 3 % o 5 % de pérdidas. <button class="ver" data-img="captura-07-calculo-cable.png" data-t="Cálculo del cable con 1 %, 3 % y 5 % de pérdidas">Ver pantalla</button></li>
     </ol>
     <h3>Cinco preguntas para hacerle al vendedor</h3>
     <details><summary>¿Cuántos Wh útiles tiene la batería?</summary><div>No te quedes con la capacidad de la etiqueta. Pregunta cuánta energía se puede usar de verdad (profundidad de descarga) y con qué eficiencia trabaja el inversor.</div></details>
     <details><summary>¿Cuánto aguanta el inversor de forma continua y en el arranque?</summary><div>Pide las dos cifras. Un aire o un refrigerador pueden pedir varias veces su potencia normal por un instante.</div></details>
     <details><summary>¿Qué rango de voltaje y qué voltaje máximo admite el MPPT?</summary><div>Con frío, el voltaje de los paneles sube. Si la suma pasa el máximo, la estación puede dañarse.</div></details>
-    <details><summary>¿Qué corriente máxima admite la entrada solar?</summary><div>Si conectas más paneles en paralelo de lo que admite, la potencia extra se desperdicia.</div></details>
+    <details><summary>¿Qué corriente máxima admite la entrada solar?</summary><div>Si conectas más paneles en paralelo de lo que admite, la potencia extra se desperdicia y, en el peor de los casos, si tu equipo no estuviese protegido correctamente, podría sobrecalentarse e incluso dañarse.</div></details>
     <details><summary>¿Qué garantía tiene y qué química de batería usa?</summary><div>Pide la garantía por escrito y la hoja técnica. Si algo no está en la hoja técnica, pídelo antes de pagar.</div></details>
   </div>
 
@@ -146,7 +150,7 @@ dialog::backdrop{background:rgba(5,10,20,.82)}
       <div class="res" id="ra" aria-live="polite">Completa los tres datos.</div>
     </div></details>
 
-    <details><summary>¿Se pasan los paneles de voltaje cuando hace frío?</summary><div>
+    <details><summary>¿Se pasan los paneles del voltaje máximo permitido cuando hace frío?</summary><div>
       <p>El voltaje en vacío (Voc) aumenta cuando baja la temperatura. Usa el coeficiente de temperatura del Voc de la hoja técnica (es negativo, en %/°C).</p>
       <div class="herr">
         <label>Voc de un panel (V)<input id="b1" type="number" inputmode="decimal" min="0"></label>
@@ -159,14 +163,14 @@ dialog::backdrop{background:rgba(5,10,20,.82)}
     </div></details>
 
     <details><summary>¿El cable de los paneles es el adecuado?</summary><div>
-      <p>Un cable fino pierde energía en forma de calor. La sección depende de la corriente, la distancia, el material (cobre o aluminio) y las pérdidas que aceptes. En la app indicas esos datos y recibes la sección en mm² y en AWG para 1 %, 3 % y 5 % de pérdidas.</p>
+      <p>Un cable fino pierde energía en forma de calor. La sección depende de la corriente, la distancia, el material (cobre o aluminio) y las pérdidas que aceptes. En la app indicas esos datos y recibes la sección en mm² y en AWG para 1 %, 3 % y 5 % de pérdidas.</p><button class="ver" data-img="captura-07-calculo-cable.png" data-t="Cálculo del cable con 1 %, 3 % y 5 % de pérdidas">Ver pantalla</button>
     </div></details>
 
     <h3 style="margin-top:24px">Cómo sacarle más provecho</h3>
     <ol class="pasos">
       <li><b>No arranques dos motores a la vez</b>Enciende primero uno y, cuando estabilice, el otro.</li>
       <li><b>Mide tu carga real</b>Compara lo que anotaste con lo que consumen tus equipos hoy; cambia con el tiempo.</li>
-      <li><b>Mira la autonomía hora por hora</b>La app muestra qué porcentaje de batería te queda a lo largo de la noche.</li>
+      <li><b>Mira la autonomía hora por hora</b>La app muestra qué porcentaje de batería te queda a lo largo de la noche. <button class="ver" data-img="captura-09-autonomia-horaria.png" data-t="Autonomía hora por hora">Ver pantalla</button></li>
     </ol>
   </div>
 </section>
@@ -182,19 +186,19 @@ dialog::backdrop{background:rgba(5,10,20,.82)}
       <label>Carga que conectas (W)<input id="c4" type="number" inputmode="decimal" min="0"></label>
     </div>
     <div class="res" id="rc" aria-live="polite">Completa los cuatro datos.</div>
-    <p class="tenue" style="margin:12px 0 0;font-size:.9rem">Es una estimación con consumo constante. La app calcula con tu carga hora por hora.</p>
+    <p class="tenue" style="margin:12px 0 0;font-size:.9rem">Es una estimación con consumo constante. La app calcula con tu carga hora por hora. <button class="ver" data-img="captura-09-autonomia-horaria.png" data-t="Autonomía hora por hora">Ver pantalla</button></p>
   </div>
 </section>
 
 <section class="wrap app">
   <h2>Lo que hace la app</h2>
   <ul>
-    <li><b>Calcula tu carga</b>Equipos, ciclos de trabajo y corriente de arranque de los motores, incluido el peor caso de arranques coincidentes.</li>
-    <li><b>Autonomía clara</b>Gráfico por hora con el porcentaje de batería que queda.</li>
-    <li><b>Biblioteca de estaciones y de paneles</b>Guardas las ofertas que te hacen y las comparas con tus datos.</li>
-    <li><b>Compatibilidad de paneles</b>Voc en frío, cadenas en serie y en paralelo, y una recomendación final.</li>
-    <li><b>Cálculo del cable</b>Sección en mm² y AWG, cobre o aluminio.</li>
-    <li><b>Esquemas de conexión y guía de uso</b>Pasos guiados que te llevan por cada ventana.</li>
+    <li><b>Calcula tu carga</b>Equipos consumidores, ciclos de trabajo y corriente de arranque de los motores, incluido el peor caso de arranques coincidentes. <button class="ver" data-img="captura-01-seleccion-equipos.png" data-t="Selección de equipos y horario del respaldo">Ver pantalla</button></li>
+    <li><b>Autonomía clara</b>Gráfico por hora con el porcentaje de batería que queda. <button class="ver" data-img="captura-09-autonomia-horaria.png" data-t="Autonomía hora por hora">Ver pantalla</button></li>
+    <li><b>Biblioteca de estaciones y de paneles</b>Guardas las ofertas que te hacen y las comparas con tus datos. <button class="ver" data-img="captura-04-comparar-estaciones.png" data-t="Comparación de estaciones con tu carga">Ver pantalla</button></li>
+    <li><b>Compatibilidad de paneles</b>Voc en frío, cadenas en serie y en paralelo, y una recomendación final. <button class="ver" data-img="captura-06-compatibilidad-paneles.png" data-t="Compatibilidad de paneles: Voc en frío, serie y paralelo">Ver pantalla</button></li>
+    <li><b>Cálculo del cable</b>Sección en mm² y AWG, cobre o aluminio. <button class="ver" data-img="captura-07-calculo-cable.png" data-t="Cálculo del cable con 1 %, 3 % y 5 % de pérdidas">Ver pantalla</button></li>
+    <li><b>Esquemas de conexión y guía de uso</b>Pasos guiados que te llevan por cada ventana. <button class="ver" data-img="captura-12-esquemas-conexion.png" data-t="Esquemas de conexión y guía de uso">Ver pantalla</button></li>
   </ul>
 </section>
 
@@ -218,15 +222,16 @@ dialog::backdrop{background:rgba(5,10,20,.82)}
   <p>Con la versión gratis resuelves lo esencial: saber qué estación de energía o inversor necesitas, o qué puedes conectar a la que ya tienes.</p>
   <ul>
     <li>Seleccionas todos los equipos que quieres respaldar.</li>
-    <li>Defines en qué momento empieza el respaldo de cada equipo y por cuántas horas.</li>
-    <li>Cada dato que debes incorporar trae una guía de dónde conseguir su valor.</li>
+    <li>Defines en qué momento empieza el respaldo de cada equipo y por cuántas horas. <button class="ver" data-img="captura-01-seleccion-equipos.png" data-t="Selección de equipos y horario del respaldo">Ver pantalla</button></li>
+    <li>Cada dato que debes incorporar trae una guía de dónde conseguir su valor. <button class="ver" data-img="captura-13-guia-datos.png" data-t="Guía de dónde conseguir cada dato">Ver pantalla</button></li>
   </ul>
   <p class="ej"><b>Ejemplo:</b> el refrigerador, desde el inicio del apagón y por 6 horas. El TV, a las 4 horas desde el inicio del apagón y por 3 horas.</p>
   <h3>Qué obtienes</h3>
-  <p>El resultado te muestra las características de la estación de energía o del inversor que debes comprar: la capacidad de la batería en Wh, la potencia continua y la potencia pico.</p>
-  <p>Si ya tienes tu estación de energía o tu inversor, la app te ayuda a entender qué cargas puedes conectar para garantizar el respaldo que necesitas.</p>
+  <p>El resultado te muestra las características de la estación de energía o del inversor que debes comprar: la capacidad de la batería en Wh, la potencia continua y la potencia pico. <button class="ver" data-img="captura-02-resultado-estacion.png" data-t="Resultado: Wh, potencia continua y potencia pico">Ver pantalla</button></p>
+  <p>Si ya tienes tu estación de energía o tu inversor, la app te ayuda a entender qué cargas puedes conectar para garantizar el respaldo que necesitas. <button class="ver" data-img="captura-14-cargas-permitidas.png" data-t="Cargas que puedes conectar a tu equipo">Ver pantalla</button></p>
   <p class="tenue">Todas las demás opciones corresponden a la versión PLUS.</p>
-  <div class="btns"><a class="btn lleno" href="https://github.com/rivnunezramon62-crypto/Adios_Apagon_Ver_Free" target="_blank" rel="noopener">Descargar la versión gratis</a></div>
+  <div class="btns"><a class="btn lleno" href="https://github.com/rivnunezramon62-crypto/adios_apagon_web/releases/latest/download/Adios_Apagon_Gratis.apk" target="_blank" rel="noopener">Descargar la versión gratis</a></div>
+  <p class="tenue" style="margin-top:14px;font-size:.9rem">Al instalarla, Android puede pedirte permiso para instalar aplicaciones de origen desconocido.</p>
 </div></dialog>
 
 <dialog id="d-plus" aria-labelledby="dp-t"><div class="dlg">
@@ -256,6 +261,13 @@ dialog::backdrop{background:rgba(5,10,20,.82)}
   <div class="btns"><a class="btn lleno" href="mailto:adiosapagon@gmail.com?subject=Solicitud%20versi%C3%B3n%20PLUS&body=Acepto%20las%20condiciones%20de%20uso%20de%20la%20versi%C3%B3n%20PLUS%20y%20solicito%20mi%20versi%C3%B3n%20de%20pago.">Acepto las condiciones</a></div>
 </div></dialog>
 
+<dialog id="d-img" aria-labelledby="di-t"><div class="dlg">
+  <button class="cerrar" data-cerrar aria-label="Cerrar">✕</button>
+  <h3 id="di-t"></h3>
+  <img id="di-img" alt="" style="display:none;margin:0 auto;border-radius:12px;max-height:70vh">
+  <p id="di-falta" class="tenue" hidden></p>
+</div></dialog>
+
 <footer><div class="wrap">Adiós Apagón. Los cálculos son una guía; confirma siempre con la hoja técnica de tus equipos y, para instalar, con un técnico competente.</div></footer>
 
 <script>
@@ -269,6 +281,12 @@ dialog::backdrop{background:rgba(5,10,20,.82)}
     d.querySelectorAll('[data-cerrar]').forEach(function(c){c.addEventListener('click',function(){d.close()})});
   });
 
+  var im=$('di-img'),fa=$('di-falta'),ti=$('di-t');
+  im.addEventListener('load',function(){im.style.display='block';fa.hidden=true});
+  im.addEventListener('error',function(){im.style.display='none';fa.hidden=false;fa.textContent='Esta captura aún no está disponible ('+im.getAttribute('data-n')+').'});
+  document.querySelectorAll('[data-img]').forEach(function(x){x.addEventListener('click',function(){
+    var d=$('d-img');ti.textContent=x.getAttribute('data-t');fa.hidden=true;im.style.display='none';
+    im.setAttribute('data-n',x.getAttribute('data-img'));im.alt=x.getAttribute('data-t');im.src=x.getAttribute('data-img');d.showModal();d.scrollTop=0})});
   var b=$('bombilla');
   b.addEventListener('click',function(){
     var on=b.getAttribute('aria-pressed')!=='true';
