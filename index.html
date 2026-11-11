@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adiós Apagón: elige bien tu estación de energía</title>
+<meta name="description" content="Calcula la carga de tu casa, compara estaciones de energía y paneles, y comprueba si tu instalación está bien hecha.">
+<link rel="icon" href="adios_apagon_icono.png">
+<style>
+:root{--noche:#0b1526;--panel:#13233f;--borde:#27406b;--luz:#ffc83d;--senal:#62d3ea;--texto:#e9eef7;--tenue:#a9b8d0;--mal:#ff8a7a;--bien:#7be0a4;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--noche);color:var(--texto);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-top:env(safe-area-inset-top,0px)}
+img{max-width:100%}
+a{color:var(--senal)}
+:focus-visible{outline:3px solid var(--luz);outline-offset:3px}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+section{padding:56px 0}
+h1,h2,h3{line-height:1.15;margin:0 0 .5em;font-weight:800}
+h1{font-size:clamp(2rem,7vw,3.4rem);letter-spacing:-.02em}
+h2{font-size:clamp(1.5rem,4.5vw,2.1rem)}
+h3{font-size:1.15rem}
+p{margin:0 0 1em;max-width:62ch}
+.tenue{color:var(--tenue)}
+header .wrap{display:flex;align-items:center;gap:12px;padding-top:14px;padding-bottom:14px}
+header img{width:40px;height:40px;border-radius:10px}
+header b{font-size:1.1rem}
+.hero{display:grid;gap:28px;align-items:center;padding-top:28px}
+@media(min-width:780px){.hero{grid-template-columns:1.2fr .8fr}}
+.bombilla{background:none;border:0;cursor:pointer;color:inherit;padding:0;justify-self:center;text-align:center;font:inherit}
+.bombilla svg{width:min(260px,62vw);height:auto;display:block;margin:auto}
+.bombilla .vidrio{fill:#1d2c47;stroke:#3a557f;stroke-width:3;transition:fill .5s,filter .5s}
+.bombilla .hilo{stroke:#3a557f;stroke-width:4;fill:none;stroke-linecap:round;transition:stroke .4s}
+.bombilla[aria-pressed=true] .vidrio{fill:var(--luz);filter:drop-shadow(0 0 28px rgba(255,200,61,.85))}
+.bombilla[aria-pressed=true] .hilo{stroke:#fff6dc}
+.bombilla small{display:block;margin-top:8px;color:var(--tenue)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.btn{display:inline-block;padding:14px 22px;border-radius:12px;font-weight:700;text-decoration:none;border:2px solid var(--luz);color:var(--luz);background:none;font-size:1rem;cursor:pointer}
+.btn.lleno{background:var(--luz);color:#1a1300}
+.btn[aria-disabled=true]{opacity:.6;pointer-events:none}
+.dolor{background:var(--panel);border-block:1px solid var(--borde)}
+.dolor ul{margin:0;padding-left:1.2em;max-width:62ch}
+.dolor li{margin-bottom:.5em}
+.tabs{display:grid;gap:10px;margin-bottom:24px}
+@media(min-width:620px){.tabs{grid-template-columns:1fr 1fr}}
+.tab{padding:16px;border-radius:14px;border:2px solid var(--borde);background:var(--panel);color:var(--texto);font:inherit;font-weight:700;text-align:left;cursor:pointer}
+.tab span{display:block;font-weight:400;color:var(--tenue);font-size:.92rem}
+.tab[aria-selected=true]{border-color:var(--luz);background:#1b2f55}
+[hidden]{display:none!important}
+ol.pasos{list-style:none;counter-reset:p;margin:0 0 28px;padding:0;display:grid;gap:12px}
+ol.pasos li{counter-increment:p;position:relative;padding:14px 16px 14px 58px;background:var(--panel);border-left:4px solid var(--luz);border-radius:0 12px 12px 0}
+ol.pasos li::before{content:counter(p);position:absolute;left:16px;top:12px;width:30px;height:30px;border-radius:50%;background:var(--luz);color:#1a1300;font-weight:800;display:grid;place-items:center}
+ol.pasos b{display:block}
+details{background:var(--panel);border:1px solid var(--borde);border-radius:12px;margin-bottom:10px}
+summary{padding:14px 16px;cursor:pointer;font-weight:700}
+details>div{padding:0 16px 16px}
+.herr{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin:10px 0}
+label{display:block;font-size:.88rem;color:var(--tenue)}
+input{width:100%;margin-top:4px;padding:11px;border-radius:10px;border:1px solid var(--borde);background:#0b1526;color:var(--texto);font:inherit}
+.res{margin-top:10px;padding:12px 14px;border-radius:10px;background:#0b1526;border:1px dashed var(--borde);min-height:3em}
+.res.bien{border-color:var(--bien);color:var(--bien)}
+.res.mal{border-color:var(--mal);color:var(--mal)}
+.calc{background:linear-gradient(160deg,#16294b,#0f1d36);border:1px solid var(--borde);border-radius:18px;padding:22px}
+.app ul{padding:0;list-style:none;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.app li{padding-left:16px;border-left:3px solid var(--senal)}
+.app li b{display:block}
+footer{border-top:1px solid var(--borde);padding:32px 0 calc(32px + env(safe-area-inset-bottom,0px));color:var(--tenue);font-size:.92rem}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><img src="adios_apagon_icono.png" alt="" onerror="this.style.display='none'"><b>Adiós Apagón</b></div></header>
+
+<main>
+<section class="wrap hero" style="padding-top:28px">
+  <div>
+    <h1>Tu casa con luz, y con las cuentas claras.</h1>
+    <p>Recibes decenas de ofertas de estaciones de energía y paneles, y ninguna se parece a la otra. Adiós Apagón calcula lo que tu casa necesita de verdad y te dice qué equipo sirve y cuál no.</p>
+    <div class="btns">
+      <a class="btn lleno" href="#caso">Quiero ordenar mis dudas</a>
+      <a class="btn" id="descargar" href="#" aria-disabled="true">Descargar la app</a>
+    </div>
+  </div>
+  <button class="bombilla" id="bombilla" aria-pressed="false" aria-label="Encender la bombilla">
+    <svg viewBox="0 0 200 260" aria-hidden="true"><path class="vidrio" d="M100 14C58 14 30 46 30 84c0 26 12 40 24 56 8 10 12 18 12 30v10h68v-10c0-12 4-20 12-30 12-16 24-30 24-56 0-38-28-70-70-70z"/><path class="hilo" d="M82 168l12-48 6 14 6-14 12 48"/><rect x="72" y="188" width="56" height="14" rx="6" fill="#3a557f"/><rect x="78" y="206" width="44" height="14" rx="6" fill="#3a557f"/><rect x="88" y="224" width="24" height="12" rx="6" fill="#3a557f"/></svg>
+    <small>Toca la bombilla</small>
+  </button>
+</section>
+
+<section class="dolor">
+  <div class="wrap">
+    <h2>Esto es lo que suele pasar</h2>
+    <ul>
+      <li>Cada vendedor te habla de números distintos: vatios, vatios-hora, picos, voltajes.</li>
+      <li>No sabes si la estación aguanta tu refrigerador y tu aire a la vez.</li>
+      <li>Los paneles «entran» en la estación, pero nadie te dice si con el frío el voltaje se pasa.</li>
+      <li>Ya compraste, y no estás seguro de que lo instalado esté bien ni de cuánto te debería durar.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="wrap" id="caso">
+  <h2>¿En cuál de estos casos estás?</h2>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="t1" aria-selected="true" aria-controls="p1">Todavía no compré<span>Quiero decidir bien antes de pagar</span></button>
+    <button class="tab" role="tab" id="t2" aria-selected="false" aria-controls="p2">Ya compré<span>Quiero comprobar mi instalación y aprovecharla</span></button>
+  </div>
+
+  <div id="p1" role="tabpanel" aria-labelledby="t1">
+    <h3>Cuatro pasos para salir de la confusión</h3>
+    <ol class="pasos">
+      <li><b>Calcula tu carga</b>Anota tus equipos y su potencia. Los motores (aire, refrigerador) piden más al arrancar, y la app lo tiene en cuenta.</li>
+      <li><b>Compara las estaciones que te ofrecen</b>Guárdalas en la biblioteca y compara su comportamiento con tu carga, una al lado de la otra.</li>
+      <li><b>Elige paneles compatibles</b>La app descarta los que ponen en riesgo la estación y te dice cuántos conectar en serie y en paralelo.</li>
+      <li><b>Calcula el cable</b>Según la distancia y el material, ves la sección necesaria con 1 %, 3 % o 5 % de pérdidas.</li>
+    </ol>
+    <h3>Cinco preguntas para hacerle al vendedor</h3>
+    <details><summary>¿Cuántos Wh útiles tiene la batería?</summary><div>No te quedes con la capacidad de la etiqueta. Pregunta cuánta energía se puede usar de verdad (profundidad de descarga) y con qué eficiencia trabaja el inversor.</div></details>
+    <details><summary>¿Cuánto aguanta el inversor de forma continua y en el arranque?</summary><div>Pide las dos cifras. Un aire o un refrigerador pueden pedir varias veces su potencia normal por un instante.</div></details>
+    <details><summary>¿Qué rango de voltaje y qué voltaje máximo admite el MPPT?</summary><div>Con frío, el voltaje de los paneles sube. Si la suma pasa el máximo, la estación puede dañarse.</div></details>
+    <details><summary>¿Qué corriente máxima admite la entrada solar?</summary><div>Si conectas más paneles en paralelo de lo que admite, la potencia extra se desperdicia.</div></details>
+    <details><summary>¿Qué garantía tiene y qué química de batería usa?</summary><div>Pide la garantía por escrito y la hoja técnica. Si algo no está en la hoja técnica, pídelo antes de pagar.</div></details>
+  </div>
+
+  <div id="p2" role="tabpanel" aria-labelledby="t2" hidden>
+    <h3>Comprueba tu instalación en tres minutos</h3>
+    <p class="tenue">Usa los datos de la hoja técnica de tu equipo. Son comprobaciones rápidas; la app hace el cálculo completo.</p>
+
+    <details open><summary>¿Arrancan juntos el aire y el refrigerador?</summary><div>
+      <p>Si dos motores arrancan a la vez, sus picos se suman. Pon el pico del inversor y el arranque de cada equipo (en vatios).</p>
+      <div class="herr">
+        <label>Pico del inversor (W)<input id="a1" type="number" inputmode="decimal" min="0"></label>
+        <label>Arranque del aire (W)<input id="a2" type="number" inputmode="decimal" min="0"></label>
+        <label>Arranque del refrigerador (W)<input id="a3" type="number" inputmode="decimal" min="0"></label>
+      </div>
+      <div class="res" id="ra" aria-live="polite">Completa los tres datos.</div>
+    </div></details>
+
+    <details><summary>¿Se pasan los paneles de voltaje cuando hace frío?</summary><div>
+      <p>El voltaje en vacío (Voc) aumenta cuando baja la temperatura. Usa el coeficiente de temperatura del Voc de la hoja técnica (es negativo, en %/°C).</p>
+      <div class="herr">
+        <label>Voc de un panel (V)<input id="b1" type="number" inputmode="decimal" min="0"></label>
+        <label>Coef. Voc (%/°C)<input id="b2" type="number" inputmode="decimal" step="0.01" placeholder="ej. -0.28"></label>
+        <label>Temperatura mínima (°C)<input id="b3" type="number" inputmode="decimal"></label>
+        <label>Paneles en serie<input id="b4" type="number" inputmode="numeric" min="1"></label>
+        <label>Voc máximo de la estación (V)<input id="b5" type="number" inputmode="decimal" min="0"></label>
+      </div>
+      <div class="res" id="rb" aria-live="polite">Completa los cinco datos.</div>
+    </div></details>
+
+    <details><summary>¿El cable de los paneles es el adecuado?</summary><div>
+      <p>Un cable fino pierde energía en forma de calor. La sección depende de la corriente, la distancia, el material (cobre o aluminio) y las pérdidas que aceptes. En la app indicas esos datos y recibes la sección en mm² y en AWG para 1 %, 3 % y 5 % de pérdidas.</p>
+    </div></details>
+
+    <h3 style="margin-top:24px">Cómo sacarle más provecho</h3>
+    <ol class="pasos">
+      <li><b>No arranques dos motores a la vez</b>Enciende primero uno y, cuando estabilice, el otro.</li>
+      <li><b>Mide tu carga real</b>Compara lo que anotaste con lo que consumen tus equipos hoy; cambia con el tiempo.</li>
+      <li><b>Mira la autonomía hora por hora</b>La app muestra qué porcentaje de batería te queda a lo largo de la noche.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="calc">
+    <h2>¿Cuántas horas te dura una estación?</h2>
+    <p class="tenue">Cálculo simple: energía útil de la batería, entre lo que consumes.</p>
+    <div class="herr">
+      <label>Batería (Wh)<input id="c1" type="number" inputmode="decimal" min="0"></label>
+      <label>Descarga útil (%)<input id="c2" type="number" inputmode="decimal" min="0" max="100"></label>
+      <label>Eficiencia del inversor (%)<input id="c3" type="number" inputmode="decimal" min="0" max="100"></label>
+      <label>Carga que conectas (W)<input id="c4" type="number" inputmode="decimal" min="0"></label>
+    </div>
+    <div class="res" id="rc" aria-live="polite">Completa los cuatro datos.</div>
+    <p class="tenue" style="margin:12px 0 0;font-size:.9rem">Es una estimación con consumo constante. La app calcula con tu carga hora por hora.</p>
+  </div>
+</section>
+
+<section class="wrap app">
+  <h2>Lo que hace la app</h2>
+  <ul>
+    <li><b>Calcula tu carga</b>Equipos, ciclos de trabajo y corriente de arranque de los motores, incluido el peor caso de arranques coincidentes.</li>
+    <li><b>Autonomía clara</b>Gráfico por hora con el porcentaje de batería que queda.</li>
+    <li><b>Biblioteca de estaciones y de paneles</b>Guardas las ofertas que te hacen y las comparas con tus datos.</li>
+    <li><b>Compatibilidad de paneles</b>Voc en frío, cadenas en serie y en paralelo, y una recomendación final.</li>
+    <li><b>Cálculo del cable</b>Sección en mm² y AWG, cobre o aluminio.</li>
+    <li><b>Esquemas de conexión y guía de uso</b>Pasos guiados que te llevan por cada ventana.</li>
+  </ul>
+</section>
+
+<section class="dolor">
+  <div class="wrap">
+    <h2>Pruébala 20 días</h2>
+    <p>La app incluye una prueba de 20 días con código de activación. Descárgala, calcula tu caso y decide con datos antes de comprar, o comprueba lo que ya tienes instalado.</p>
+    <div class="btns"><a class="btn lleno" id="descargar2" href="#" aria-disabled="true">Descargar la app</a><a class="btn" id="contacto" href="#" aria-disabled="true">Escribirme por WhatsApp</a></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Quién la hizo</h2>
+  <p>Adiós Apagón es obra del Ing. M.Sc. Ramón Alberto Núñez Riverón, en Cuba. Nació para facilitar la compra de estaciones de energía que respalden un hogar durante los apagones.</p>
+</section>
+</main>
+
+<footer><div class="wrap">Adiós Apagón. Los cálculos son una guía; confirma siempre con la hoja técnica de tus equipos y, para instalar, con un técnico competente.</div></footer>
+
+<script>
+// Configuración: pon aquí tus enlaces. Si los dejas vacíos, los botones salen desactivados.
+var APK_URL = "";      // Ejemplo: "https://github.com/TU_USUARIO/TU_REPO/releases/download/v1/AdiosApagon.apk"
+var WHATSAPP = "";     // Solo números con código de país, sin + ni espacios
+
+(function(){
+  function $(i){return document.getElementById(i)}
+  function activar(id,url,txt){var e=$(id);if(!url)return;e.href=url;e.removeAttribute('aria-disabled');if(txt)e.textContent=txt}
+  ['descargar','descargar2'].forEach(function(i){activar(i,APK_URL)});
+  activar('contacto',WHATSAPP?'https://wa.me/'+WHATSAPP:'');
+
+  var b=$('bombilla');
+  b.addEventListener('click',function(){
+    var on=b.getAttribute('aria-pressed')!=='true';
+    b.setAttribute('aria-pressed',on);
+    b.setAttribute('aria-label',on?'Apagar la bombilla':'Encender la bombilla');
+    b.querySelector('small').textContent=on?'Así se ve sin apagones':'Toca la bombilla';
+  });
+
+  var tabs=[$('t1'),$('t2')],pans=[$('p1'),$('p2')];
+  tabs.forEach(function(t,i){t.addEventListener('click',function(){
+    tabs.forEach(function(x,j){x.setAttribute('aria-selected',i===j);pans[j].hidden=i!==j});
+  })});
+
+  function n(i){var v=$(i).value;return v===''?NaN:parseFloat(v)}
+  function salida(id,txt,clase){var r=$(id);r.textContent=txt;r.className='res '+(clase||'')}
+  function f(x,d){return x.toLocaleString('es',{maximumFractionDigits:d===undefined?1:d})}
+
+  function arranques(){
+    var p=n('a1'),x=n('a2'),y=n('a3');
+    if([p,x,y].some(isNaN))return salida('ra','Completa los tres datos.');
+    var s=x+y;
+    if(s>p)salida('ra','Juntos piden '+f(s,0)+' W y el inversor aguanta '+f(p,0)+' W. Si arrancan a la vez, la estación puede apagarse. Evita que coincidan o busca un inversor con más pico.','mal');
+    else salida('ra','Juntos piden '+f(s,0)+' W y el inversor aguanta '+f(p,0)+' W. El arranque simultáneo de estos dos equipos entra en el pico del inversor.','bien');
+  }
+  function frio(){
+    var voc=n('b1'),c=n('b2'),t=n('b3'),s=n('b4'),m=n('b5');
+    if([voc,c,t,s,m].some(isNaN))return salida('rb','Completa los cinco datos.');
+    var vf=voc*(1+(c/100)*(t-25)),tot=vf*s;
+    var txt='A '+f(t,0)+' °C cada panel da unos '+f(vf)+' V y la cadena de '+f(s,0)+' da unos '+f(tot)+' V. La estación admite '+f(m)+' V. ';
+    if(tot>m)salida('rb',txt+'Se pasa. Conecta menos paneles en serie.','mal');
+    else salida('rb',txt+'Está por debajo del máximo. Confirma además el rango de operación del MPPT en su hoja técnica.','bien');
+  }
+  function horas(){
+    var wh=n('c1'),d=n('c2'),e=n('c3'),w=n('c4');
+    if([wh,d,e,w].some(isNaN)||w<=0)return salida('rc','Completa los cuatro datos.');
+    var h=wh*(d/100)*(e/100)/w;
+    var hh=Math.floor(h),mm=Math.round((h-hh)*60);
+    salida('rc','Te dura unas '+f(h)+' horas ('+hh+' h '+mm+' min) con esa carga.','bien');
+  }
+  ['a1','a2','a3'].forEach(function(i){$(i).addEventListener('input',arranques)});
+  ['b1','b2','b3','b4','b5'].forEach(function(i){$(i).addEventListener('input',frio)});
+  ['c1','c2','c3','c4'].forEach(function(i){$(i).addEventListener('input',horas)});
+})();
+</script>
+</body>
+</html>
