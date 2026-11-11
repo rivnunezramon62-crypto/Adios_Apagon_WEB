@@ -65,6 +65,14 @@ input{width:100%;margin-top:4px;padding:11px;border-radius:10px;border:1px solid
 .app li{padding-left:16px;border-left:3px solid var(--senal)}
 .app li b{display:block}
 footer{border-top:1px solid var(--borde);padding:32px 0 calc(32px + env(safe-area-inset-bottom,0px));color:var(--tenue);font-size:.92rem}
+.btn{font-family:inherit}
+dialog{border:1px solid var(--borde);border-radius:18px;background:var(--panel);color:var(--texto);padding:0;width:min(640px,calc(100% - 24px));overflow:auto}
+dialog::backdrop{background:rgba(5,10,20,.82)}
+.dlg{padding:22px 22px 28px}
+.cerrar{float:right;margin:0 0 8px 12px;width:42px;height:42px;border-radius:50%;border:1px solid var(--borde);background:var(--noche);color:var(--texto);font-size:1.1rem;cursor:pointer}
+.dlg ul{padding-left:1.2em;max-width:62ch}
+.dlg li{margin-bottom:.6em}
+.ej{padding:12px 14px;border-left:4px solid var(--senal);background:#0b1526;border-radius:0 10px 10px 0;margin:0 0 1em}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -77,8 +85,8 @@ footer{border-top:1px solid var(--borde);padding:32px 0 calc(32px + env(safe-are
     <h1>Tu casa con luz, y con las cuentas claras.</h1>
     <p>Recibes decenas de ofertas de estaciones de energía y paneles, y ninguna se parece a la otra. Adiós Apagón calcula lo que tu casa necesita de verdad y te dice qué equipo sirve y cuál no.</p>
     <div class="btns">
-      <a class="btn lleno" href="#caso">Quiero ordenar mis dudas</a>
-      <a class="btn" id="descargar" href="#" aria-disabled="true">Descargar la app</a>
+      <button class="btn lleno" data-abrir="d-gratis">Descargar la app gratis</button>
+      <button class="btn" data-abrir="d-plus">App versión PLUS</button>
     </div>
   </div>
   <button class="bombilla" id="bombilla" aria-pressed="false" aria-label="Encender la bombilla">
@@ -92,8 +100,10 @@ footer{border-top:1px solid var(--borde);padding:32px 0 calc(32px + env(safe-are
     <h2>Esto es lo que suele pasar</h2>
     <ul>
       <li>Cada vendedor te habla de números distintos: vatios, vatios-hora, picos, voltajes.</li>
-      <li>No sabes si la estación aguanta tu refrigerador y tu aire a la vez.</li>
-      <li>Los paneles «entran» en la estación, pero nadie te dice si con el frío el voltaje se pasa.</li>
+      <li>No sabes si la estación aguanta tu refrigerador y tu nevera a la vez.</li>
+      <li>Los paneles «entran» en la estación, pero nadie te dice a qué temperatura ambiente en invierno se daña tu equipo.</li>
+      <li>Te venden paneles y no te dicen que esa potencia es de laboratorio, y quieres saber realmente cuánto vas a generar en verano.</li>
+      <li>Te venden cables para los paneles y no sabes las pérdidas de potencia que tendrás con el calibre propuesto.</li>
       <li>Ya compraste, y no estás seguro de que lo instalado esté bien ni de cuánto te debería durar.</li>
     </ul>
   </div>
@@ -190,9 +200,9 @@ footer{border-top:1px solid var(--borde);padding:32px 0 calc(32px + env(safe-are
 
 <section class="dolor">
   <div class="wrap">
-    <h2>Pruébala 20 días</h2>
-    <p>La app incluye una prueba de 20 días con código de activación. Descárgala, calcula tu caso y decide con datos antes de comprar, o comprueba lo que ya tienes instalado.</p>
-    <div class="btns"><a class="btn lleno" id="descargar2" href="#" aria-disabled="true">Descargar la app</a><a class="btn" id="contacto" href="#" aria-disabled="true">Escribirme por WhatsApp</a></div>
+    <h2>Elige tu versión</h2>
+    <p>Empieza con la versión gratis para saber qué estación necesitas, o pasa a la versión PLUS para tener todas las herramientas.</p>
+    <div class="btns"><button class="btn lleno" data-abrir="d-gratis">Descargar la app gratis</button><button class="btn" data-abrir="d-plus">App versión PLUS</button></div>
   </div>
 </section>
 
@@ -202,18 +212,62 @@ footer{border-top:1px solid var(--borde);padding:32px 0 calc(32px + env(safe-are
 </section>
 </main>
 
+<dialog id="d-gratis" aria-labelledby="dg-t"><div class="dlg">
+  <button class="cerrar" data-cerrar aria-label="Cerrar">✕</button>
+  <h2 id="dg-t">Versión gratis</h2>
+  <p>Con la versión gratis resuelves lo esencial: saber qué estación de energía o inversor necesitas, o qué puedes conectar a la que ya tienes.</p>
+  <ul>
+    <li>Seleccionas todos los equipos que quieres respaldar.</li>
+    <li>Defines en qué momento empieza el respaldo de cada equipo y por cuántas horas.</li>
+    <li>Cada dato que debes incorporar trae una guía de dónde conseguir su valor.</li>
+  </ul>
+  <p class="ej"><b>Ejemplo:</b> el refrigerador, desde el inicio del apagón y por 6 horas. El TV, a las 4 horas desde el inicio del apagón y por 3 horas.</p>
+  <h3>Qué obtienes</h3>
+  <p>El resultado te muestra las características de la estación de energía o del inversor que debes comprar: la capacidad de la batería en Wh, la potencia continua y la potencia pico.</p>
+  <p>Si ya tienes tu estación de energía o tu inversor, la app te ayuda a entender qué cargas puedes conectar para garantizar el respaldo que necesitas.</p>
+  <p class="tenue">Todas las demás opciones corresponden a la versión PLUS.</p>
+  <div class="btns"><a class="btn lleno" href="https://github.com/rivnunezramon62-crypto/Adios_Apagon_Ver_Free" target="_blank" rel="noopener">Descargar la versión gratis</a></div>
+</div></dialog>
+
+<dialog id="d-plus" aria-labelledby="dp-t"><div class="dlg">
+  <button class="cerrar" data-cerrar aria-label="Cerrar">✕</button>
+  <h2 id="dp-t">App versión PLUS</h2>
+  <p>Esta versión incluye la totalidad de las funciones explicadas en esta página. Es una versión de pago: solicita tu versión escribiendo al autor.</p>
+  <h3>Acuerdo entre las partes</h3>
+  <p>Al aceptar las condiciones, usted acuerda cumplir con las obligaciones que emanan del respeto al derecho de autor:</p>
+  <ul>
+    <li>La licencia es personal e intransferible, y se concede para uso propio durante 1 año.</li>
+    <li>No puede copiar, distribuir, publicar, vender, alquilar ni prestar la aplicación, ni compartirla por ningún medio.</li>
+    <li>No puede compartir ni divulgar su código de activación.</li>
+    <li>No puede descompilar, desensamblar, modificar ni hacer ingeniería inversa de la aplicación, ni crear obras derivadas a partir de ella.</li>
+    <li>No puede eliminar ni alterar los avisos de autoría, ni presentar la aplicación como obra propia.</li>
+    <li>No puede intentar eludir ni falsificar el sistema de activación de la licencia.</li>
+    <li>El autor conserva todos los derechos de propiedad intelectual sobre la aplicación; usted solo recibe el derecho a usarla.</li>
+    <li>Los resultados son una guía de cálculo. Confirme siempre con la hoja técnica de sus equipos y, para instalar, con un técnico competente.</li>
+  </ul>
+  <h3>Lo que garantiza el autor</h3>
+  <ul>
+    <li>Sus datos personales no son utilizados.</li>
+    <li>No se tiene acceso a su dispositivo.</li>
+    <li>No existen puertas traseras.</li>
+  </ul>
+  <h3>Activación</h3>
+  <p>Recibirá un código de activación. Para comprobarlo y activar su licencia de uso por 1 año, la aplicación necesita acceder a un servidor.</p>
+  <div class="btns"><a class="btn lleno" href="mailto:adiosapagon@gmail.com?subject=Solicitud%20versi%C3%B3n%20PLUS&body=Acepto%20las%20condiciones%20de%20uso%20de%20la%20versi%C3%B3n%20PLUS%20y%20solicito%20mi%20versi%C3%B3n%20de%20pago.">Acepto las condiciones</a></div>
+</div></dialog>
+
 <footer><div class="wrap">Adiós Apagón. Los cálculos son una guía; confirma siempre con la hoja técnica de tus equipos y, para instalar, con un técnico competente.</div></footer>
 
 <script>
-// Configuración: pon aquí tus enlaces. Si los dejas vacíos, los botones salen desactivados.
-var APK_URL = "";      // Ejemplo: "https://github.com/TU_USUARIO/TU_REPO/releases/download/v1/AdiosApagon.apk"
-var WHATSAPP = "";     // Solo números con código de país, sin + ni espacios
-
 (function(){
   function $(i){return document.getElementById(i)}
-  function activar(id,url,txt){var e=$(id);if(!url)return;e.href=url;e.removeAttribute('aria-disabled');if(txt)e.textContent=txt}
-  ['descargar','descargar2'].forEach(function(i){activar(i,APK_URL)});
-  activar('contacto',WHATSAPP?'https://wa.me/'+WHATSAPP:'');
+  document.querySelectorAll('[data-abrir]').forEach(function(b){
+    b.addEventListener('click',function(){var d=$(b.getAttribute('data-abrir'));d.showModal();d.scrollTop=0})
+  });
+  document.querySelectorAll('dialog').forEach(function(d){
+    d.addEventListener('click',function(e){if(e.target===d)d.close()});
+    d.querySelectorAll('[data-cerrar]').forEach(function(c){c.addEventListener('click',function(){d.close()})});
+  });
 
   var b=$('bombilla');
   b.addEventListener('click',function(){
