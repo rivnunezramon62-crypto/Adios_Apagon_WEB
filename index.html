@@ -331,5 +331,24 @@ dialog::backdrop{background:rgba(5,10,20,.82)}
   ['c1','c2','c3','c4'].forEach(function(i){$(i).addEventListener('input',horas)});
 })();
 </script>
+  <script>
+var GA_ID = "G-8MX2QFD1DL";
+(function(){
+  if(!GA_ID)return;
+  var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){dataLayer.push(arguments)};
+  gtag('js',new Date());gtag('config',GA_ID);
+  document.querySelector('footer .wrap').insertAdjacentHTML('beforeend','<br>Esta página usa Google Analytics para estadísticas de visitas (país, dispositivo y tiempo de uso).');
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a,button');if(!a)return;
+    var h=a.getAttribute('href')||'';
+    if(h.indexOf('.apk')>-1)gtag('event','descarga_apk');
+    else if(h.indexOf('mailto:')===0)gtag('event','solicitud_plus');
+    else if(a.hasAttribute('data-img'))gtag('event','ver_pantalla',{captura:a.getAttribute('data-img')});
+    else if(a.hasAttribute('data-abrir'))gtag('event','abrir_ventana',{ventana:a.getAttribute('data-abrir')});
+  });
+})();
+  </script>
 </body>
 </html>
